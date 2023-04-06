@@ -22,7 +22,7 @@ List<Book> booksList = [
     discription:
         '1984 tells the futuristic story of a dystopian, totalitarian world where free will and love are forbidden. Although the year 1984 has long since passed, the prophecy of a society controlled by fear and lies is arguably more relevant now than ever.',
     rating: '*****',
-    gernal: 'futuristic story',
+    gernal: 'Futuristic story',
   ),
   Book(
     imgUrl:
@@ -31,7 +31,7 @@ List<Book> booksList = [
     discription:
         'Tolkien’s fantasy epic is one of the top must-read books out there. Set in Middle Earth – a world full of hobbits, elves, orcs, goblins, and wizards – The Lord of the Rings will take you on an unbelievable adventure.',
     rating: '*****',
-    gernal: 'fantasy adventure',
+    gernal: 'Fantasy adventure',
   ),
   Book(
     imgUrl:
@@ -40,7 +40,7 @@ List<Book> booksList = [
     discription:
         'The Kite Runner is a moving story of an unlikely friendship between a wealthy boy and the son of his father’s servant. Set in Afghanistan during a time of tragedy and destruction, this unforgettable novel will have you hooked from start to finish.',
     rating: '*****',
-    gernal: 'novel',
+    gernal: 'Novel',
   ),
   Book(
     imgUrl:
