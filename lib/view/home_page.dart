@@ -1,9 +1,31 @@
 import 'package:book_ui/dummy/dummy_data.dart';
 import 'package:book_ui/dummy/related_books.dart';
+import 'package:book_ui/view/shimmer_effect.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  var isDataFetch = false;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchingData();
+  }
+
+  void fetchingData() {
+    Future.delayed(Duration(seconds: 3), () {
+      setState(() {
+        isDataFetch = true;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,107 +37,109 @@ class HomePage extends StatelessWidget {
       'Favourite',
     ];
     return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        padding: const EdgeInsets.only(
-          left: 15.0,
-          right: 15.0,
-        ),
-        color: const Color(0xffF2F5F9),
-        child: ListView(
-          children: [
-            const SizedBox(
-              height: 16.0,
-            ),
-
-            //! custom appBar
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Hi John',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w500,
+      body: isDataFetch == false
+          ? ShimmerEffectPage()
+          : Container(
+              height: double.infinity,
+              width: double.infinity,
+              padding: const EdgeInsets.only(
+                left: 15.0,
+                right: 15.0,
+              ),
+              color: const Color(0xffF2F5F9),
+              child: ListView(
+                children: [
+                  const SizedBox(
+                    height: 16.0,
                   ),
-                ),
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.search,
-                        size: 24.0,
+
+                  //! custom appBar
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Hi John',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.notification_add,
-                        size: 24.0,
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.search,
+                              size: 24.0,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.notification_add,
+                              size: 24.0,
+                            ),
+                          ),
+                        ],
                       ),
+                    ],
+                  ),
+                  //! appbar is complete
+                  const SizedBox(height: 15.0),
+                  //! creating image banner
+                  Container(
+                    height: 120,
+                    decoration: BoxDecoration(
+                      // color: Colors.blue,
+                      image: const DecorationImage(
+                        image: AssetImage('assets/images/bookBanner.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
                     ),
-                  ],
-                ),
-              ],
-            ),
-            //! appbar is complete
-            const SizedBox(height: 15.0),
-            //! creating image banner
-            Container(
-              height: 120,
-              decoration: BoxDecoration(
-                // color: Colors.blue,
-                image: const DecorationImage(
-                  image: AssetImage('assets/images/bookBanner.jpg'),
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  const SizedBox(height: 15.0),
+                  // !crating scrollable custom tab_bar
+                  Container(
+                    height: 40,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: tabList.length,
+                      itemBuilder: (context, index) {
+                        final tabItem = tabList[index];
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            tabItem,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+
+                  //! creating body parts of ui
+                  BooksListView(context),
+
+                  const SizedBox(height: 15.0),
+                  const Text(
+                    'You may also like',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 15.0),
+                  //! creating related books sections
+                  RelatedListView(context),
+
+                  const SizedBox(height: 55.0),
+                ],
               ),
             ),
-            const SizedBox(height: 15.0),
-            // !crating scrollable custom tab_bar
-            Container(
-              height: 40,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: tabList.length,
-                itemBuilder: (context, index) {
-                  final tabItem = tabList[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      tabItem,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16.0,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-
-            //! creating body parts of ui
-            BooksListView(context),
-
-            const SizedBox(height: 15.0),
-            const Text(
-              'You may also like',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 15.0),
-            //! creating related books sections
-            RelatedListView(context),
-
-            const SizedBox(height: 55.0),
-          ],
-        ),
-      ),
     );
   }
 
