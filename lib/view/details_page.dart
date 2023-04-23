@@ -1,9 +1,15 @@
 import 'package:book_ui/dummy/dummy_data.dart';
+import 'package:book_ui/dummy/related_books.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
-  // final Book bookDetailsData;
-  // DetailPage({super.key, required this.bookDetailsData});
+  final Book bookDetailsData;
+  // final RelatedBook rbookDetailData;
+  DetailPage({
+    super.key,
+    required this.bookDetailsData,
+    // required this.rbookDetailData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,18 +17,33 @@ class DetailPage extends StatelessWidget {
       child: Scaffold(
         body: ListView(
           children: [
-            Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.3,
-              decoration: BoxDecoration(
-                // color: Colors.red,
-                image: DecorationImage(
-                  image: NetworkImage(
-                    booksList[0].imgUrl,
+            Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height * 0.32,
+                  decoration: BoxDecoration(
+                    // color: Colors.red,
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        // booksList[0].imgUrl,
+                        bookDetailsData.imgUrl,
+                      ),
+                      fit: BoxFit.fill,
+                    ),
                   ),
-                  fit: BoxFit.fill,
                 ),
-              ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                    size: 24.0,
+                  ),
+                ),
+              ],
             ),
             Container(
               width: double.infinity,
@@ -32,7 +53,7 @@ class DetailPage extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    height: 70,
+                    height: 80,
                     // color: Colors.red,
                     child: Padding(
                       padding: const EdgeInsets.all(
@@ -41,26 +62,33 @@ class DetailPage extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            booksList[0].title,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16.0,
+                          Container(
+                            width: 200,
+                            child: Text(
+                              bookDetailsData.title,
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 26.0,
+                              ),
                             ),
                           ),
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                booksList[0].rating,
+                                bookDetailsData.rating,
                                 style: const TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.yellow,
                                   fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
-                                booksList[0].gernal,
+                                bookDetailsData.gernal,
                                 style: const TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.bold,
                                   fontSize: 16.0,
                                 ),
                               ),
@@ -77,7 +105,7 @@ class DetailPage extends StatelessWidget {
                     ),
                     child: Container(
                       child: Text(
-                        booksList[0].discription,
+                        bookDetailsData.discription,
                         textAlign: TextAlign.justify,
                         style: const TextStyle(
                           fontSize: 18.0,

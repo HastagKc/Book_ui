@@ -1,5 +1,6 @@
 import 'package:book_ui/dummy/dummy_data.dart';
 import 'package:book_ui/dummy/related_books.dart';
+import 'package:book_ui/view/details_page.dart';
 import 'package:book_ui/view/shimmer_effect.dart';
 import 'package:flutter/material.dart';
 
@@ -150,102 +151,115 @@ class _HomePageState extends State<HomePage> {
         scrollDirection: Axis.horizontal,
         itemCount: booksList.length,
         itemBuilder: (context, index) {
-          return Container(
-            height: 225,
-            // color: Color.fromRGBO(33, 150, 243, 1),
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                Card(
-                  elevation: 5.0,
-                  child: Container(
-                    height: 200,
-                    width: 300,
-                    padding: const EdgeInsets.all(10.0),
-                    // color: Colors.green,
-                    child: Row(
-                      children: [
-                        const Spacer(),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                // color: Colors.black,
-                                height: 180,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      booksList[index].title,
-                                      style: const TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      booksList[index].discription,
-                                      maxLines: 4,
-                                      // textAlign: TextAlign.justify,
-                                      style: const TextStyle(
-                                        fontSize: 16.0,
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          booksList[index].rating,
-                                          maxLines: 4,
-                                          style: const TextStyle(
-                                            fontSize: 16.0,
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 70,
-                                          height: 20,
-                                          child: Text(
-                                            booksList[index].gernal,
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                            style: const TextStyle(
-                                              fontSize: 16.0,
-                                              color: Colors.red,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+          return InkWell(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => DetailPage(
+                    bookDetailsData: booksList[index],
                   ),
                 ),
-                Positioned(
-                  left: 0,
-                  top: 0,
-                  child: Container(
-                    height: 200,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0),
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          booksList[index].imgUrl,
+              );
+            },
+            child: Container(
+              height: 225,
+              // color: Color.fromRGBO(33, 150, 243, 1),
+              child: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Card(
+                    elevation: 5.0,
+                    child: Container(
+                      height: 200,
+                      width: 300,
+                      padding: const EdgeInsets.all(10.0),
+                      // color: Colors.green,
+                      child: Row(
+                        children: [
+                          const Spacer(),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  // color: Colors.black,
+                                  height: 180,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        booksList[index].title,
+                                        style: const TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        booksList[index].discription,
+                                        maxLines: 4,
+                                        // textAlign: TextAlign.justify,
+                                        style: const TextStyle(
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            booksList[index].rating,
+                                            maxLines: 4,
+                                            style: const TextStyle(
+                                              fontSize: 16.0,
+                                              color: Colors.yellow,
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 60,
+                                            height: 20,
+                                            child: Text(
+                                              booksList[index].gernal,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style: const TextStyle(
+                                                fontSize: 16.0,
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 0,
+                    top: 0,
+                    child: Container(
+                      height: 200,
+                      width: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            booksList[index].imgUrl,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
@@ -266,25 +280,36 @@ class _HomePageState extends State<HomePage> {
             children: [
               Expanded(
                 flex: 7,
-                child: Container(
-                  width: 200,
-                  margin: const EdgeInsets.only(right: 10.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        relatedBookList[index].rImgUrl,
+                child: InkWell(
+                  onTap: () {
+                    /*  Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => DetailPage(
+                          bookDetailsData: relatedBookList[index],
+                        ),
                       ),
-                      fit: BoxFit.cover,
+                    ); */
+                  },
+                  child: Container(
+                    width: 200,
+                    margin: const EdgeInsets.only(right: 10.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          relatedBookList[index].rImgUrl,
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 3,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 3,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
                   ),
                 ),
               ),

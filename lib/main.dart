@@ -1,5 +1,7 @@
+import 'package:book_ui/dummy/dummy_data.dart';
 import 'package:book_ui/view/details_page.dart';
 import 'package:book_ui/view/home_page.dart';
+import 'package:book_ui/view/related_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +16,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // home: HomePage(),
-      home: DetailPage(),
+      home: RelatedBookPage(),
+      /*   home: DetailPage(
+        bookDetailsData: booksList[0],
+      ), */
     );
   }
 }
