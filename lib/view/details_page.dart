@@ -27,7 +27,7 @@ class DetailPage extends StatelessWidget {
             Container(
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.7,
-              color: Colors.blue,
+              // color: Colors.blue,
               child: ListView(
                 children: [
                   Container(
@@ -44,7 +44,7 @@ class DetailPage extends StatelessWidget {
                           Text(
                             booksList[0].title,
                             style: const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontSize: 16.0,
                             ),
                           ),
@@ -53,14 +53,14 @@ class DetailPage extends StatelessWidget {
                               Text(
                                 booksList[0].rating,
                                 style: const TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontSize: 16.0,
                                 ),
                               ),
                               Text(
                                 booksList[0].gernal,
                                 style: const TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontSize: 16.0,
                                 ),
                               ),
@@ -81,7 +81,7 @@ class DetailPage extends StatelessWidget {
                         textAlign: TextAlign.justify,
                         style: const TextStyle(
                           fontSize: 18.0,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -90,10 +90,19 @@ class DetailPage extends StatelessWidget {
                     height: 80,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ButtonWidget(
-                        label: 'Read',
+                      buttonFun(
+                        context,
+                        label: 'Read Book',
+                        labelcolor: Colors.white,
                         backcolor: Colors.blue,
+                      ),
+                      buttonFun(
+                        context,
+                        label: 'More Info',
+                        labelcolor: Colors.black,
+                        backcolor: Colors.white,
                       ),
                     ],
                   ),
@@ -106,20 +115,39 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  Widget button(
-    BuildContext buildContext,
-    String label,
-    Color backcolor,
-  ) {
-    return Container(
-      width: 200,
-      child: ElevatedButton(
-        onPressed: () {},
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 12.0,
+  Widget buttonFun(
+    BuildContext buildContext, {
+    required String label,
+    required Color backcolor,
+    required Color labelcolor,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 10.0,
+        right: 10.0,
+      ),
+      child: InkWell(
+        onTap: () {},
+        child: Container(
+          width: 160,
+          height: 60,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.0),
+            border: Border.all(
+              color: Colors.grey,
+              width: 1.2,
+              style: BorderStyle.solid,
+            ),
             color: backcolor,
+          ),
+          child: Center(
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: 22.0,
+                color: labelcolor,
+              ),
+            ),
           ),
         ),
       ),
