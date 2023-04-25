@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // home: HomePage(),
-      home: RelatedBookPage(),
+      home: HomePage(),
+      // home: RelatedBookPage(),
       /*   home: DetailPage(
         bookDetailsData: booksList[0],
       ), */

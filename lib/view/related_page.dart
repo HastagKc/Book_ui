@@ -34,6 +34,11 @@ class RelatedBookPage extends StatelessWidget {
           const SizedBox(
             height: 20.0,
           ),
+          Row(
+            children: [
+              
+            ],
+          ),
         ],
       ),
     );
